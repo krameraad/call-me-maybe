@@ -18,12 +18,6 @@ class LLMInterface:
         self.model = Small_LLM_Model(model_name)
         "Model interface provided by LLM SDK."
 
-        self.vocab: list[str] = list(
-            json.loads(
-                Path(self.model.get_path_to_vocab_file()).read_text()
-            ).keys())
-        "List of all tokens the model has in its vocabulary."
-
         self.context = self.get_tokens(f"""Available functions:
 {'\n'.join([': '.join([x.name, x.description]) for x in defs])}""")
         "General context used to improve results for all prompts."
@@ -126,12 +120,13 @@ class LLMInterface:
 
     def inspect(self, s: str) -> None:
         "Neatly print the tokens making up `s`."
-        print(f"""{D + "─" * 9}┬{"─" * 30 + X}
-{H}Token{X}    {D}│{X} {H}String{X}
-{D + "─" * 9}┼{"─" * 30 + X}""")
+        print(
+            f"{D + "─" * 80 + X}\n"
+            f"           {H}Token{X} {D}│{X} {H}String{X}\n"
+            f"{D + "─" * 80 + X}")
         for token in self.get_tokens(s):
-            print(f"{token:>8} {D}│{X} {self.vocab[token]}")
-        print(f"{D + "─" * 9}┴{"─" * 30 + X}")
+            print(f"{token:>16} {D}│{X} {repr(self.model.decode([token]))}")
+        print(f"{D + "─" * 80 + X}")
 
     def dump(self, s: str, path: Path) -> None:
         """Dump a JSON string into a file according to a specification.

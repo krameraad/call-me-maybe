@@ -13,9 +13,7 @@ Output is generated in `data/output/function_calls.json`.
 
 To customize the input, you can create your own function definitions and tests
 and provide the paths to them when running using `uv run -m src ...`.
-When running directly, you can also specify `-e` and `-d DUMP` arguments,
-which show an examination of the tokens generated
-and dump the model's vocabulary in a text file, respectively.
+When running directly, you can examine the generated tokens with `-e`.
 
 The `-m MODEL` argument allows selecting a model.
 The `llm_sdk` handles downloading and interacting with LLMs,
@@ -35,9 +33,6 @@ Examples:
 		-f data/input/custom_functions_definition.json \
 		-i data/input/custom_function_calling_tests.json \
 		-o data/output/function_calls.json
-```
-```bash
-	uv run python -m src -d data/output/vocab.txt
 ```
 ```bash
 	uv run python -m src \

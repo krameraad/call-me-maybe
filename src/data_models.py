@@ -1,3 +1,5 @@
+"Data models to validate input."
+
 from pathlib import Path
 from argparse import Namespace
 
@@ -41,6 +43,5 @@ class Args(Namespace):
     input: list[str]
     output: Path
     model: str
-    dump: Path | None
     examine: bool
     timeout: float

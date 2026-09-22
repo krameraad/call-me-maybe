@@ -1,7 +1,7 @@
 [project]
-name = "callmemaybe"
-version = "0.1.0"
-description = "Demonstrating constrained decoding to generate valid JSON."
+name = "call-me-maybe"
+version = "1.1"
+description = "Introduction to function calling in LLMs"
 readme = "README.md"
 requires-python = ">=3.13"
 dependencies = [
